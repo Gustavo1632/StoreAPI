@@ -48,30 +48,7 @@ namespace TesteAPI.Controllers
             var products = category.Products.ToList();
 
             return Ok(products);
-        }
-
-        /*[HttpPost]
-        [Authorize(Roles = "employee")]
-        public async Task<ActionResult<Product>> Create([FromBody] Product model)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var category = _context.Categories.AsNoTracking().FirstOrDefault(x => x.Id==model.CategoryId);
-
-            if (category == null)
-                return Ok("Categoria não cadastrada");
-
-            model.Category = category;
-
-        _product.GenerateId(model);
-            var product = new Product(model.Id, model.Title,model.Description, model.Price,model.CategoryId,category);
-                       
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return product;
-
-        }*/
+        }             
 
         [HttpPost]
         [Authorize(Roles = "employee")]
@@ -83,6 +60,7 @@ namespace TesteAPI.Controllers
                 return Ok("Categoria informada não existe");
 
             _product.GenerateId(model);
+
             var product = new Product(model.Id, model.Title, model.Description, model.Price, model.CategoryId);
             category.Products.Add(product);
 
